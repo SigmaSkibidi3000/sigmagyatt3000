@@ -8,7 +8,21 @@ from datetime import datetime, timezone
 from typing import List, Dict
 import threading
 import time
-from keep_alive import keep_alive
+from flask import Flask
+from threading import Thread
+
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "<b>Never Settle.</b>"
+
+def run():
+  app.run(host='0.0.0.0',port=8080)
+
+def keep_alive():
+    t = Thread(target=run)
+    t.start()
 
 lock = threading.Lock()
 
@@ -258,8 +272,13 @@ def sendWebhook(latestItem, url):
               "inline": True
             },
             {
-              "name": ":link: Quick Links",
+              "name": ":link: Vinted Link",
               "value": f"[View Listing]({latestItem.url})"
+            },
+            {  
+
+              "name": ":link: Ebay Link",
+              "value": f"[Link](https://www.ebay.co.uk/sch/i.html?_from=R40&_trksid=p2334524.m570.l1313&_nkw={latestItem.title.replace(' ', '+')})"
             }
           ],
             "author": {
@@ -290,17 +309,23 @@ def sendWebhook(latestItem, url):
 val = ''
 val2 = ''
 val3 = ''
+lastItem = ''
+lastItem2 = ''
+lastItem3 = ''
 def main():
     with lock:
         global val
         global val2 
         global val3
+        global lastItem
+        global lastItem2
+        global lastItem3
         
         vinted = Vinted()
         
         items = vinted.items.search("https://www.vinted.co.uk/catalog?search_text=Nike&order=newest_first",1,1)
-        items2 = vinted.items.search("https://www.vinted.co.uk/catalog?search_text=Nike%20SB&order=newest_first",1,1)
-        items3 = vinted.items.search("https://www.vinted.co.uk/catalog?search_text=Nike%20Off-White&order=newest_first",1,1)
+        items2 = vinted.items.search("https://www.vinted.co.uk/catalog?search_text=sb%20dunks&order=newest_first&brand_ids[]=283953",1,1)
+        items3 = vinted.items.search("https://www.vinted.co.uk/catalog?search_text=Nike%20off%20white&order=newest_first&brand_ids[]=5750136",1,1)
 
         if items and items2 and items3:
             latestItem = items[0]
@@ -312,21 +337,22 @@ def main():
         if val == None:
             print('Monitor live')
             print(latestItem.title)
-        elif val != latestItem.url:
+        elif val != latestItem.url and lastItem != latestItem.title and lastItem2 != latestItem.title and lastItem3 != latestItem.title:
             print(latestItem.title)
             url = "https://canary.discord.com/api/webhooks/1258431841451511809/-A9gALygTkR46PoPfwPPrCBDUXSzfcFyWWqiM62skioVfRaq6n3iNIGwi9qiHuDHxT9Y"
             sendWebhook(latestItem, url)
-
-        if val2 != latestItem2.url:
+            lastItem = latestItem.title
+        if val2 != latestItem2.url and lastItem != latestItem2.title and lastItem2 != latestItem2.title and lastItem3 != latestItem2.title:
             print(latestItem2.title)
-            url = "https://canary.discord.com/api/webhooks/1258431841451511809/-A9gALygTkR46PoPfwPPrCBDUXSzfcFyWWqiM62skioVfRaq6n3iNIGwi9qiHuDHxT9Y"
+            url = "https://canary.discord.com/api/webhooks/1261687617183809638/SgKDwqoW5UM1OXlIWNwkav3ClDZr7x5VOBJo13aIArWBxCG-oe_TE7eMIGFBmEoy6YWG"
             sendWebhook(latestItem2, url)   
-
-        if val3 != latestItem3.url:
+            lastItem2 = latestItem2.title
+        if val3 != latestItem3.url and lastItem != latestItem3.title and lastItem2 != latestItem3.title and lastItem3 != latestItem3.title:
             print(latestItem3.title)
-            url = "https://canary.discord.com/api/webhooks/1258431841451511809/-A9gALygTkR46PoPfwPPrCBDUXSzfcFyWWqiM62skioVfRaq6n3iNIGwi9qiHuDHxT9Y"
-            sendWebhook(latestItem3, url) 
-        
+            url = "https://canary.discord.com/api/webhooks/1261728971029090396/FrJTnNSfdBSwaOwQ3ihZ7iPAiv3i3ammqAscHQ_Ly5p7RME2tRoBj9V7CA0JtT17QUR7"
+            sendWebhook(latestItem3, url)   
+            lastItem3 = latestItem3.title
+
         val = latestItem.url
         val2 = latestItem2.url
         val3 = latestItem3.url
@@ -335,3 +361,9 @@ def main():
 while True:
     keep_alive()
     main()
+
+
+
+'''
+https://canary.discord.com/api/webhooks/1258431841451511809/-A9gALygTkR46PoPfwPPrCBDUXSzfcFyWWqiM62skioVfRaq6n3iNIGwi9qiHuDHxT9Y
+'''
