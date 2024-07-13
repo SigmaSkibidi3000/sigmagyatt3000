@@ -341,13 +341,7 @@ def main():
         val = latestItem.url
         val2 = latestItem2.url
         val3 = latestItem3.url
-        time.sleep(10)
+    time.sleep(20)
         
 while True:
     main()
-
-
-
-'''
-https://canary.discord.com/api/webhooks/1258431841451511809/-A9gALygTkR46PoPfwPPrCBDUXSzfcFyWWqiM62skioVfRaq6n3iNIGwi9qiHuDHxT9Y
-'''
