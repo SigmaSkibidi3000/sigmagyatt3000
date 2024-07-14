@@ -24,6 +24,8 @@ def keep_alive():
     t = Thread(target=run)
     t.start()
 
+keep_alive()
+
 lock = threading.Lock()
 
 
@@ -359,7 +361,6 @@ def main():
     time.sleep(20)
         
 while True:
-    keep_alive()
     main()
 
 
