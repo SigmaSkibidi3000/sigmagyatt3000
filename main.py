@@ -341,17 +341,17 @@ def main():
             print(latestItem.title)
         elif val != latestItem.url and lastItem != latestItem.title and lastItem2 != latestItem.title and lastItem3 != latestItem.title:
             print(latestItem.title)
-            url = "https://canary.discord.com/api/webhooks/1258431841451511809/-A9gALygTkR46PoPfwPPrCBDUXSzfcFyWWqiM62skioVfRaq6n3iNIGwi9qiHuDHxT9Y"
+            url = "https://canary.discord.com/api/webhooks/1261815711945326654/cPEQHGddruahBQlbkPDnc0HD_Z7XCs5_ZfA8zAh88Z0rVfv6zbbyq_l4u61NRI4I5YJM"
             sendWebhook(latestItem, url)
             lastItem = latestItem.title
         if val2 != latestItem2.url and lastItem != latestItem2.title and lastItem2 != latestItem2.title and lastItem3 != latestItem2.title:
             print(latestItem2.title)
-            url = "https://canary.discord.com/api/webhooks/1261687617183809638/SgKDwqoW5UM1OXlIWNwkav3ClDZr7x5VOBJo13aIArWBxCG-oe_TE7eMIGFBmEoy6YWG"
+            url = "https://canary.discord.com/api/webhooks/1261815711945326654/cPEQHGddruahBQlbkPDnc0HD_Z7XCs5_ZfA8zAh88Z0rVfv6zbbyq_l4u61NRI4I5YJM"
             sendWebhook(latestItem2, url)   
             lastItem2 = latestItem2.title
         if val3 != latestItem3.url and lastItem != latestItem3.title and lastItem2 != latestItem3.title and lastItem3 != latestItem3.title:
             print(latestItem3.title)
-            url = "https://canary.discord.com/api/webhooks/1261728971029090396/FrJTnNSfdBSwaOwQ3ihZ7iPAiv3i3ammqAscHQ_Ly5p7RME2tRoBj9V7CA0JtT17QUR7"
+            url = "https://canary.discord.com/api/webhooks/1261815711945326654/cPEQHGddruahBQlbkPDnc0HD_Z7XCs5_ZfA8zAh88Z0rVfv6zbbyq_l4u61NRI4I5YJM"
             sendWebhook(latestItem3, url)   
             lastItem3 = latestItem3.title
 
